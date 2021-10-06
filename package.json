@@ -1,0 +1,54 @@
+{
+  "name": "nanomodule-monorepo",
+  "version": "0.0.0",
+  "repository": "https://github.com/Eddort/nanomodule-monorepo",
+  "author": "Eddort <webisforce@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/eslint/**",
+      "**/jest/**"
+    ]
+  },
+  "simple-git-hooks": {
+    "pre-push": "yarn test"
+  },
+  "devDependencies": {
+    "@release-it/conventional-changelog": "^3.2.0",
+    "release-it": "^14.11.5",
+    "release-it-yarn-workspaces-clean-publish": "^0.0.4"
+  },
+  "scripts": {
+    "test": "yarn workspaces run test",
+    "release": "release-it --only-version"
+  },
+  "release-it": {
+    "npm": false,
+    "git": {
+      "commitMessage": "chore(release): v${version}"
+    },
+    "hooks": {
+      "after:bump": [
+        "yarn"
+      ],
+      "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
+    },
+    "github": {
+      "release": true
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "infile": "CHANGELOG.md",
+        "ignoreRecommendedBump": true,
+        "preset": {
+          "name": "conventionalcommits"
+        }
+      },
+      "release-it-yarn-workspaces-clean-publish": true
+    }
+  }
+}

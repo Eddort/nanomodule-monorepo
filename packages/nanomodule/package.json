@@ -1,0 +1,12 @@
+{
+  "name": "initial-nanomodule",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'your own test'",
+    "deploy": "npx clean-publish"
+  },
+  "author": "",
+  "license": "ISC"
+}
